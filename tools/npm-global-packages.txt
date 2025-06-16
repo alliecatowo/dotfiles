@@ -1,0 +1,4 @@
+/Users/allison/.asdf/installs/nodejs/24.2.0/lib
+├── corepack@0.33.0
+└── npm@11.3.0
+

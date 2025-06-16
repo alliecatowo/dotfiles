@@ -1,0 +1,9 @@
+/Users/allison/.asdf/shims/cargo
+/Users/allison/.asdf/shims/go
+/Users/allison/.asdf/shims/node
+/Users/allison/.asdf/shims/npm
+/Users/allison/.asdf/shims/pnpm
+/Users/allison/.asdf/shims/rustc
+/Users/allison/dev/core/.venv/bin/python3
+/usr/bin/java
+/usr/bin/pip3

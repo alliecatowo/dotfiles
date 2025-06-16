@@ -1,0 +1,183 @@
+{
+  "editor.bracketPairColorization.enabled": true,
+  "workbench.colorCustomizations": {
+    "editorBracketHighlight.foreground1": "#D167B5",
+    "editorBracketHighlight.foreground2": "#6B6D8C",
+    "editorBracketHighlight.foreground3": "#A8C3C8",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#ff0080"
+  },
+  // "editor.fontLigatures": true,
+  // Set the font
+  "editor.fontFamily": "'JetBrains Mono', Consolas, 'Courier New', monospace",
+  // Set the font size
+  "editor.fontSize": 13,
+  // Turn on font ligatures
+  "editor.fontLigatures": true,
+  // Set letter spacing
+  "editor.letterSpacing": 0.4,
+  // Enable smooth scrolling in the editor
+  "editor.smoothScrolling": true,
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnType": false, // required
+  "editor.formatOnPaste": true, // optional
+  "editor.formatOnSaveMode": "file", // required to format on save
+  "vs-code-prettier-eslint.prettierLast": false, // set as "true" to run 'prettier' last not first
+  "files.eol": "\n",
+  "explorer.confirmDragAndDrop": false,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "workbench.colorTheme": "Catppuccin Frappé",
+  "liveshare.connectionMode": "relay",
+  "workbench.startupEditor": "none",
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "markdown": "html",
+    "jinja-html": "html",
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.renderWhitespace": "selection",
+    "files.autoSave": "afterDelay",
+  },
+  "black-formatter.args": [
+    "--line-length=120"
+  ],
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "editor.minimap.enabled": false,
+  // "[vue]": {
+  //   "editor.defaultFormatter": ""
+  // },
+  "[html]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "explorer.confirmDelete": false,
+  "code-runner.executorMapByFileExtension": {
+    ".vb": "cd $dir && vbc /nologo $fileName && $dir$fileNameWithoutExt",
+    ".vbs": "cscript //Nologo",
+    ".scala": "scala",
+    ".jl": "julia",
+    ".cr": "crystal",
+    ".ml": "ocaml",
+    ".exs": "elixir",
+    ".hx": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+    ".rkt": "racket",
+    ".scm": "csi -script",
+    ".ahk": "autohotkey",
+    ".au3": "autoit3",
+    ".kt": "cd $dir && kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar && java -jar $fileNameWithoutExt.jar",
+    ".kts": "kotlinc -script",
+    ".dart": "dart",
+    ".pas": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+    ".pp": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+    ".d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+    ".hs": "runhaskell",
+    ".nim": "nim compile --verbosity:0 --hints:off --run",
+    ".csproj": "dotnet run --project",
+    ".fsproj": "dotnet run --project",
+    ".lisp": "sbcl --script",
+    ".kit": "kitc --run",
+    ".v": "v run",
+    ".vsh": "v run",
+    ".sass": "sass --style expanded",
+    ".cu": "cd $dir && nvcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    ".ring": "ring"
+  },
+  "code-runner.languageIdToFileExtensionMap": {
+    "bat": ".bat",
+    "powershell": ".ps1",
+    "typescript": ".ts"
+  },
+  "code-runner.executorMap": {
+    "python": "python3 -u"
+  },
+  "[jinja-html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "files.associations": {
+    "*.jinja": "jinja-html"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false
+  },
+  "svg.preview.transparencyGrid": true,
+  "svg.preview.boundingBox": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "typescript.tsserver.log": "off",
+  "terminal.integrated.enableMultiLinePasteWarning": "auto",
+  "cloudcode.project": "parsecgo-production",
+  "workbench.layoutControl.enabled": false,
+  "editor.inlineSuggest.showToolbar": "always",
+  "git.autofetch": true,
+  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "go.formatTool": "gofumpt",
+  "go.testTimeout": "99999s",
+  "workbench.sideBar.location": "right",
+  "sqltools.useNodeRuntime": true,
+  "[markdown]": {
+    // "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "mypy-type-checker.reportingScope": "workspace",
+  "githubPullRequests.pushBranch": "always",
+  "window.customTitleBarVisibility": "never",
+  "go.toolsManagement.autoUpdate": true,
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.autoFormatStrings": true,
+  "pythonIndent.useTabOnHangingIndent": true,
+  "python.REPL.enableREPLSmartSend": false,
+  "pylint.args": [
+    "[\"--disable=C0116\", \"--max-line-length=120\"]"
+  ],
+  "editor.renderWhitespace": "none",
+  "python.analysis.extraPaths": [
+    "{cwd}/.venv/"
+  ],
+  "chat.editing.alwaysSaveWithGeneratedChanges": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "roo-cline.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "roo-cline.vsCodeLmModelSelector": {},
+  "editor.maxTokenizationLineLength": 2000000000,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "editor.largeFileOptimizations": false,
+  "settingsSync.ignoredExtensions": [],
+  "editor.experimental.asyncTokenizationLogging": true,
+  "settingsSync.ignoredSettings": [],
+  "security.workspace.trust.untrustedFiles": "open",
+  "jupyter.allowUnauthorizedRemoteConnection": true,
+  "jupyter.jupyterServer.address": "http://0.0.0.0:8888",
+  "notebook.multiCursor.enabled": true
+}
