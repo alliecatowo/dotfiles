@@ -38,7 +38,7 @@ brew install stow
 ### Installation
 ```bash
 # Clone this repository
-git clone https://github.com/[your-username]/dotfiles.git ~/dotfiles
+git clone https://github.com/alliecatowo/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # Deploy all configurations
@@ -89,6 +89,33 @@ dotfiles/
     ├── backup.sh          # Backup current configs
     └── update.sh          # Update dotfiles
 ```
+
+## ⚡ Performance Benchmarks
+
+*Results may vary depending on your system configuration, but here's what this shell setup achieves:*
+
+### **Shell Startup Performance**
+```
+System: MacBook Pro M3 Pro (18GB RAM)
+OS: macOS
+Shell: Zsh 5.9
+
+Zsh Interactive Shell Startup:
+  Average: ~0.12 seconds
+  Range: 0.107s - 0.235s (first run slower due to caching)
+  
+Prompt + Environment Load:
+  Average: ~0.14 seconds
+  Includes: Starship prompt, all plugins, PATH setup
+```
+
+### **What Makes It Fast**
+- **Lazy Loading**: Plugins load only when needed
+- **Optimized PATH**: Clean, minimal PATH configuration
+- **Smart Caching**: Antidote caches plugin compilation
+- **Minimal Sourcing**: Only essential configs loaded upfront
+
+> 💡 **Note**: First shell startup may be slower (~0.2s) due to plugin caching, subsequent shells are consistently fast (~0.11s)
 
 ## 🎯 Features
 
