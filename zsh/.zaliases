@@ -1,0 +1,60 @@
+# ~/.zaliases - Command aliases and shortcuts
+# Sourced by .zprofile
+
+# ── Git Aliases ───────────────────────────────────────────────────
+alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gl='git log --oneline --graph --decorate'
+alias gd='git diff'
+alias gp='git push'
+alias gpu='git pull'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+
+# ── File Operations ───────────────────────────────────────────────
+alias cat='bat'
+alias ls='lsd'
+alias ll='lsd -Alh'
+alias la='lsd -A'
+alias lt='lsd --tree'
+alias l='lsd -l'
+
+# ── Navigation ────────────────────────────────────────────────────
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+alias -- -='cd -'  # Go to previous directory
+
+# ── System Utilities ──────────────────────────────────────────────
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# ── Package Management ────────────────────────────────────────────
+alias update='brew update && brew upgrade && brew cleanup'
+alias bup='brew update && brew upgrade'
+alias binfo='brew info'
+alias bsearch='brew search'
+
+# ── Development Tools ─────────────────────────────────────────────
+alias py='python'
+alias pip='python -m pip'
+alias venv='python -m venv'
+alias activate='source .venv/bin/activate'
+
+# ── Quick Edits ─────────────────────────────────────────────────
+alias zshrc='$EDITOR ~/.zshrc'
+alias zshenv='$EDITOR ~/.zshenv'
+alias zprofile='$EDITOR ~/.zprofile'
+alias aliases='$EDITOR ~/.zaliases'
+
+# ── Shortcuts ────────────────────────────────────────────────────
+alias reload='source ~/.zshrc'
+alias path='echo $PATH | tr ":" "\n"'
+alias h='history'
+alias c='clear'
+alias q='exit'
+

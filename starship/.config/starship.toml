@@ -1,0 +1,65 @@
+# Set the active color palette
+palette = "dracula"
+
+# Define the Dracula color palette
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"
+
+# Character prompt icons
+[character]
+success_symbol = "[🦄](bold green)"
+error_symbol = "[👹](bold red)"
+
+# Display Git branch when inside a repo
+[git_branch]
+style = "bold pink"
+format = "[$branch]($style) "
+
+# Show git status only if there's something relevant
+[git_status]
+style = "bold purple"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+disabled = false
+
+# Show command execution time when it's over 3 seconds
+[cmd_duration]
+min_time = 3000  # 3 seconds
+format = "⏳ [$duration]($style)"
+style = "bold yellow"
+
+# Make directory display cleaner
+[directory]
+style = "bold green"
+truncate_to_repo = false
+truncation_length = 4
+truncation_symbol = "…/"
+
+# Hide GCP username
+[gcloud]
+disabled = true
+
+# Hide AWS info
+[aws]
+disabled = true
+
+# Hide hostname (unless on SSH)
+[hostname]
+ssh_only = true
+style = "bold purple"
+format = "[@$hostname]($style) "
+
+# Make user display cleaner
+[username]
+show_always = false
+style_user = "bold cyan"
+format = "[$user]($style) "
