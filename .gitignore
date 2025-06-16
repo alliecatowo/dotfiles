@@ -41,3 +41,36 @@ config/configstore/
 .zsh_plugins.zsh
 
 .vim/pack/themes/start/dracula
+
+# Raycast Extension Code (keep config.json only)
+config/raycast/extensions/*/
+!config/raycast/extensions/*/package.json
+config/raycast/extensions/*/*.js
+config/raycast/extensions/*/*.js.map
+config/raycast/extensions/*/*.d.ts
+config/raycast/extensions/*/node_modules/
+config/raycast/extensions/*/dist/
+config/raycast/extensions/*/.next/
+config/raycast/extensions/*/build/
+
+# VSCode/Cursor large files
+config/Code/logs/
+config/Code/CachedData/
+config/Code/User/workspaceStorage/
+config/Code/User/History/
+config/Cursor/logs/
+config/Cursor/CachedData/
+config/Cursor/User/workspaceStorage/
+config/Cursor/User/History/
+
+# Brew/Package Manager generated files
+**/*.lock
+**/package-lock.json
+**/yarn.lock
+**/Pipfile.lock
+**/poetry.lock
+
+# Large binary files
+*.dmg
+*.pkg
+*.app
