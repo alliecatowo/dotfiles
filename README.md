@@ -70,8 +70,13 @@ dotfiles/
 │   ├── .gitconfig         # Main git config
 │   ├── .gitconfig-github  # GitHub-specific config
 │   └── .gitconfig-gitlab  # GitLab-specific config
-├── starship/               # Prompt configuration
-│   └── starship.toml      # Starship config
+├── config/                  # Application configs
+│   ├── starship.toml       # Starship prompt config
+│   ├── gh/                 # GitHub CLI
+│   ├── glab-cli/           # GitLab CLI
+│   ├── raycast/            # Raycast
+│   ├── spicetify/          # Spotify theming
+│   └── rclone/             # Cloud storage sync
 ├── vim/                    # Vim configuration
 │   └── .vim/              # Vim files
 ├── fzf/                    # FZF configuration
@@ -79,12 +84,6 @@ dotfiles/
 ├── asdf/                   # Version management
 │   ├── .tool-versions     # Global tool versions
 │   └── .python-version    # Python version
-├── config/                 # Application configs
-│   ├── gh/               # GitHub CLI
-│   ├── glab-cli/         # GitLab CLI
-│   ├── raycast/          # Raycast
-│   ├── spicetify/        # Spotify theming
-│   └── rclone/           # Cloud storage sync
 └── scripts/                # Management scripts
     ├── install.sh         # Full installation
     ├── backup.sh          # Backup current configs

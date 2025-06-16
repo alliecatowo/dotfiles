@@ -12,4 +12,3 @@ romkatv/gitstatus kind:defer
 
 # Syntax Highlighting - must be last and static!
 zdharma-continuum/fast-syntax-highlighting kind:defer
-

@@ -40,3 +40,4 @@ config/configstore/
 # Compiled antidote plugins
 .zsh_plugins.zsh
 
+.vim/pack/themes/start/dracula

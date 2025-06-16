@@ -86,7 +86,7 @@ packages=(
 for package in "${packages[@]}"; do
     if [[ -d "$package" ]]; then
         log_info "Deploying $package configuration..."
-        stow -v "$package"
+        stow --adopt -v "$package"
         log_success "$package deployed successfully"
     else
         log_warning "Package directory $package not found, skipping..."
@@ -105,7 +105,14 @@ fi
 if [[ -d "config" ]]; then
     log_info "Deploying application configurations..."
     mkdir -p "$HOME/.config"
-    stow -t "$HOME/.config" config
+    
+    # Handle starship config separately since it's in the config package now
+    if [[ -f "config/starship.toml" ]]; then
+        log_info "Creating starship.toml symlink..."
+        ln -sf "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
+        log_success "Starship config deployed successfully"
+    fi
+    
     log_success "Application configs deployed successfully"
 fi
 
