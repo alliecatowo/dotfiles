@@ -1,190 +1,232 @@
-# 🚀 Allison's Kickass Dotfiles
+# 🦄 Allie's Dotfiles
 
-> **Lightning-fast, organized, and beautifully managed development environment**
+> **Mise-first, Linux-native, beautifully crafted development environment**
 
-This repository contains my meticulously organized dotfiles, managed with [GNU Stow](https://www.gnu.org/software/stow/) for seamless deployment across machines.
+My personal dotfiles for Fedora Linux, built around a **mise-first philosophy** for unified tool management. Everything you need for a fast, productive, and aesthetically pleasing development setup.
 
-## ✨ What's Included
+## ✨ Philosophy
 
-### 🐚 **Shell Configuration**
-- **Zsh** with proper file organization (`.zshenv`, `.zprofile`, `.zshrc`, `.zaliases`)
-- **Antidote** plugin manager with curated plugins
-- **Starship** prompt with Dracula theme
-- **FZF** integration with advanced tab completion
+**Mise-First Approach:** All development tools are managed through [mise](https://mise.jdx.dev/), providing consistent versions across projects and machines. No more juggling asdf, nvm, pyenv, rbenv, etc. — mise handles it all.
 
-### 🛠️ **Development Tools**
-- **ASDF** version management for 15+ languages/tools
-- **Git** configuration with conditional includes
-- **Vim** with Dracula theme
-- **Tool versions** managed globally
+**Linux Native:** Built for Fedora Linux with KDE Plasma, but adaptable to other distros.
 
-### 🎨 **UI Tools**
-- **Starship** prompt configuration
-- **Raycast** settings
-- **Spicetify** Spotify theming
-- **GitHub CLI** and **GitLab CLI** configs
+**Minimal & Fast:** Only the essentials, optimized for quick shell startup and maximum productivity.
 
-## 🚀 Quick Setup
+## 🛠️ Tech Stack
 
-### Prerequisites
-```bash
-# Install Homebrew (if not already installed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+### Core Tools
+- **Shell:** Zsh (primary) + Bash (with Starship)
+- **Prompt:** [Starship](https://starship.rs/) with Dracula theme & unicorn 🦄
+- **Version Manager:** [Mise](https://mise.jdx.dev/) for everything
+- **Terminal:** [Ghostty](https://ghostty.org/)
+- **Editor:** [Neovim](https://neovim.io/) with [LazyVim](https://www.lazyvim.org/)
 
-# Install Stow
-brew install stow
-```
+### Development Languages (via Mise)
+- **Node.js** 24.9.0 (latest)
+- **Python** 3.13.7 (latest)
+- **Rust** 1.90.0 (latest)
+- **Go** 1.25.1 (latest)
 
-### Installation
-```bash
-# Clone this repository
-git clone https://github.com/alliecatowo/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+### CLI Tools
+- **lazygit** - Terminal UI for git
+- **zoxide** - Smart directory jumper
+- **gh** - GitHub CLI
+- **eza** - Modern `ls` replacement
+- **bat** - Better `cat` with syntax highlighting
 
-# Deploy all configurations
-./install.sh
-```
-
-### Manual Installation (Advanced)
-```bash
-# Deploy specific configurations
-stow zsh      # Shell configuration
-stow git      # Git configuration
-stow starship # Prompt configuration
-stow vim      # Vim configuration
-stow asdf     # Tool versions
-stow config   # Application configs
-```
+### AI/LLM Tools
+- **Claude Code** - AI coding assistant (locally installed)
+- **Gemini CLI** - Google's AI assistant
+- **OpenAI Codex** - OpenAI's coding assistant
 
 ## 📁 Structure
 
 ```
 dotfiles/
-├── zsh/                    # Shell configuration
-│   ├── .zshenv            # Environment variables
-│   ├── .zprofile          # Login shell setup
-│   ├── .zshrc             # Interactive shell config
-│   ├── .zaliases          # Command aliases
-│   └── .zsh_plugins.txt   # Antidote plugin list
-├── git/                    # Git configuration
-│   ├── .gitconfig         # Main git config
-│   ├── .gitconfig-github  # GitHub-specific config
-│   └── .gitconfig-gitlab  # GitLab-specific config
-├── config/                  # Application configs
-│   ├── starship.toml       # Starship prompt config
-│   ├── gh/                 # GitHub CLI
-│   ├── glab-cli/           # GitLab CLI
-│   ├── raycast/            # Raycast
-│   ├── spicetify/          # Spotify theming
-│   └── rclone/             # Cloud storage sync
-├── vim/                    # Vim configuration
-│   └── .vim/              # Vim files
-├── fzf/                    # FZF configuration
-│   └── .fzf.zsh          # FZF shell integration
-├── asdf/                   # Version management
-│   ├── .tool-versions     # Global tool versions
-│   └── .python-version    # Python version
-└── scripts/                # Management scripts
-    ├── install.sh         # Full installation
-    ├── backup.sh          # Backup current configs
-    └── update.sh          # Update dotfiles
+├── bash/
+│   └── .bashrc              # Bash with Starship & Mise
+├── zsh/
+│   ├── .zshrc               # Zsh config with history & bindings
+│   └── .zsh_plugins.txt     # Antidote plugins
+├── mise/
+│   └── config.toml          # Tool versions & configuration
+├── starship/
+│   └── starship.toml        # Prompt configuration (Dracula theme)
+├── ghostty/
+│   └── config               # Terminal configuration
+├── git/
+│   ├── .gitconfig           # Git configuration
+│   └── .gitignore_global    # Global gitignore patterns
+├── nvim/                    # Neovim configuration (LazyVim)
+├── neofetch/
+│   └── config.conf          # System info display
+├── konsole/
+│   └── Dracula.colorscheme  # KDE Konsole Dracula theme
+└── .old/                    # Archived previous configs
 ```
 
-## ⚡ Performance Benchmarks
+## 🚀 Quick Start
 
-*Results may vary depending on your system configuration, but here's what this shell setup achieves:*
+### Prerequisites
 
-### **Shell Startup Performance**
-```
-System: MacBook Pro M3 Pro (18GB RAM)
-OS: macOS
-Shell: Zsh 5.9
+```bash
+# Install mise (if not already installed)
+curl https://mise.run | sh
 
-Zsh Interactive Shell Startup:
-  Average: ~0.12 seconds
-  Range: 0.107s - 0.235s (first run slower due to caching)
-  
-Prompt + Environment Load:
-  Average: ~0.14 seconds
-  Includes: Starship prompt, all plugins, PATH setup
+# Install starship
+curl -sS https://starship.rs/install.sh | sh
+
+# Install antidote (zsh plugin manager)
+git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.antidote
 ```
 
-### **What Makes It Fast**
-- **Lazy Loading**: Plugins load only when needed
-- **Optimized PATH**: Clean, minimal PATH configuration
-- **Smart Caching**: Antidote caches plugin compilation
-- **Minimal Sourcing**: Only essential configs loaded upfront
+### Installation
 
-> 💡 **Note**: First shell startup may be slower (~0.2s) due to plugin caching, subsequent shells are consistently fast (~0.11s)
+```bash
+# Clone this repository
+git clone git@github.com:alliecatowo/dotfiles.git ~/develop/dotfiles
+cd ~/develop/dotfiles
 
-## 🎯 Features
+# Symlink configurations (choose what you need)
+ln -sf ~/develop/dotfiles/bash/.bashrc ~/.bashrc
+ln -sf ~/develop/dotfiles/zsh/.zshrc ~/.zshrc
+ln -sf ~/develop/dotfiles/zsh/.zsh_plugins.txt ~/.zsh_plugins.txt
+ln -sf ~/develop/dotfiles/mise/config.toml ~/.config/mise/config.toml
+ln -sf ~/develop/dotfiles/starship/starship.toml ~/.config/starship.toml
+ln -sf ~/develop/dotfiles/ghostty/config ~/.config/ghostty/config
+ln -sf ~/develop/dotfiles/git/.gitconfig ~/.gitconfig
+ln -sf ~/develop/dotfiles/git/.gitignore_global ~/.gitignore_global
+ln -sf ~/develop/dotfiles/nvim ~/.config/nvim
 
-### **Lightning-Fast Shell**
-- Optimized zsh configuration with proper file separation
-- Antidote plugin manager for performance
-- Advanced FZF tab completion with previews
-- Dracula theme consistency across all tools
+# Install mise tools
+mise install
+```
 
-### **Unified Tool Management**
-- ASDF manages 15+ development tools
-- Global defaults that work everywhere
-- Project-specific overrides via `.tool-versions`
-- Clean PATH management
+### First Run
 
-### **Beautiful Prompt**
-- Starship prompt with Dracula colors
-- Git status integration
-- Command duration display
-- Directory truncation
+```bash
+# Restart your shell or source the config
+exec zsh
+# or
+source ~/.zshrc
 
-### **Smart Git Configuration**
-- Conditional includes for GitHub/GitLab
-- GPG signing enabled
-- Auto-setup remote branches
-- Rebase-first workflow
+# Verify mise is working
+mise doctor
+
+# Check installed tools
+mise ls
+```
+
+## ⚡ Features
+
+### Mise-First Tool Management
+- **Unified interface** for all language versions and tools
+- **Project-specific versions** via `.mise.toml` or `.tool-versions`
+- **Global defaults** in `~/.config/mise/config.toml`
+- **No PATH pollution** - mise handles shimming intelligently
+
+### Shell Configuration
+
+#### Zsh Improvements
+- **Smart history:** 50,000 lines, shared across sessions, de-duplicated
+- **Better bindings:** Ctrl/Alt + arrows for word navigation, improved search
+- **Modern tools:** Syntax highlighting, autosuggestions, completions
+- **Fast startup:** Optimized plugin loading with antidote
+
+#### Bash Support
+- **Starship prompt** (matching zsh)
+- **Mise integration** for consistent environment
+- **Useful aliases** for productivity
+
+### Starship Prompt
+- **Dracula color scheme** for consistency
+- **Git integration** with detailed status icons
+- **Language detection** (Python, Rust, Go, Node.js)
+- **Mise indicator** showing active tool versions
+- **Performance optimized** with 500ms timeout
+
+### Git Configuration
+- **GPG signing** enabled by default
+- **Auto-setup remote** branches on push
+- **Rebase-first** workflow (no merge commits on pull)
+- **GitHub credential helper** via `gh` CLI
+
+## 🎨 Theming
+
+Everything uses the **Dracula** color scheme for visual consistency:
+- Starship prompt (Dracula palette)
+- Konsole terminal (Dracula.colorscheme)
+- Ghostty terminal (configured for Dracula)
+- Neovim (LazyVim with Dracula)
+
+**Unicorn prompt:** Because we're fabulous 🦄
 
 ## 🔧 Customization
 
 ### Adding New Tools
-1. Add to `asdf/.tool-versions`
-2. Run `asdf plugin add <tool>` and `asdf install`
-3. Commit changes
-
-### Modifying Aliases
-Edit `zsh/.zaliases` and run `reload` to apply changes.
-
-### Updating Plugins
-Modify `zsh/.zsh_plugins.txt` and restart your shell.
-
-## 📋 Management Commands
 
 ```bash
-# Update all tools
-asdf plugin update --all
-asdf install
+# Add a new tool to mise
+mise use -g node@22           # Install & set as global default
+mise use python@3.12          # Project-specific version
 
-# Update Homebrew packages
-update  # (alias for brew update && brew upgrade && brew cleanup)
-
-# Reload shell configuration
-reload  # (alias for source ~/.zshrc)
-
-# Edit configuration files
-zshrc     # Edit .zshrc
-aliases   # Edit .zaliases
-zprofile  # Edit .zprofile
+# Edit mise config directly
+nvim ~/.config/mise/config.toml
 ```
 
-## 🔄 Synchronization
+### Modifying Aliases
+
+Edit `zsh/.zshrc` or `bash/.bashrc` and reload:
+```bash
+source ~/.zshrc  # or ~/.bashrc
+```
+
+### Updating Tools
+
+```bash
+# Update all mise tools
+mise upgrade
+
+# Update specific tool
+mise upgrade node
+
+# Update shell plugins
+rm ~/.zsh_plugins.zsh
+exec zsh
+```
+
+## 📋 Common Commands
+
+### Mise
+```bash
+mise ls                  # List installed tools
+mise use node@latest     # Use latest node version
+mise install             # Install all tools from config
+mise doctor              # Check mise health
+```
+
+### Git
+```bash
+gs                      # git status
+ga .                    # git add
+gc -m "message"         # git commit
+gp                      # git push
+gl                      # git pull
+```
+
+### Navigation
+```bash
+z <directory>           # Jump to directory (zoxide)
+..                      # cd ..
+...                     # cd ../..
+```
+
+## 🔄 Syncing Across Machines
 
 ### Backup Current Config
 ```bash
-./scripts/backup.sh
-```
-
-### Update Dotfiles
-```bash
-./scripts/update.sh
+cd ~/develop/dotfiles
+# Make changes to configs
 git add -A
 git commit -m "Update configurations"
 git push
@@ -192,43 +234,49 @@ git push
 
 ### Deploy to New Machine
 ```bash
-git clone <your-repo-url> ~/dotfiles
-cd ~/dotfiles
-./install.sh
+git clone git@github.com:alliecatowo/dotfiles.git ~/develop/dotfiles
+cd ~/develop/dotfiles
+# Follow installation steps above
 ```
 
-## 🎨 Theme
+## 🎯 Why Mise?
 
-This configuration uses the **Dracula** theme consistently across:
-- Terminal colors
-- Starship prompt
-- Bat syntax highlighting
-- Vim editor
-- All supported applications
+Coming from asdf, Homebrew, nvm, pyenv, etc., **mise** consolidates everything:
 
-## 📱 Supported Applications
+- ✅ **Faster** than asdf (written in Rust)
+- ✅ **Compatible** with asdf plugins & `.tool-versions`
+- ✅ **More features** (tasks, env vars, templates)
+- ✅ **Better UX** (clearer errors, helpful messages)
+- ✅ **Single tool** for everything
 
-- **Zsh** - Shell
-- **Starship** - Prompt
-- **Git** - Version control
-- **Vim** - Editor
-- **FZF** - Fuzzy finder
-- **GitHub CLI** - GitHub integration
-- **GitLab CLI** - GitLab integration
-- **Raycast** - macOS launcher
-- **Spicetify** - Spotify theming
-- **Rclone** - Cloud storage
-- **ASDF** - Version management
+## 📱 Supported Tools & Apps
+
+### Configured
+- Zsh - Shell
+- Bash - Alternative shell
+- Starship - Prompt
+- Git - Version control
+- Neovim - Editor
+- Ghostty - Terminal
+- Konsole - KDE terminal
+- Neofetch - System info
+- Mise - Version manager
+
+### Managed by Mise
+- Node.js, Python, Rust, Go
+- lazygit, gemini-cli, codex
+- Any tool with mise/asdf plugin support
 
 ## 🤝 Contributing
 
-Feel free to fork this repository and adapt it to your needs! If you have improvements or suggestions, please open an issue or PR.
+These are my personal dotfiles, but feel free to fork and adapt them! If you find improvements, open an issue or PR.
 
 ## 📄 License
 
-MIT License - Feel free to use and modify as needed.
+MIT License - Use freely and adapt to your needs.
 
 ---
 
-**Made with ❤️ and lots of ☕ by Allison**
+**Made with 🦄 and ❤️ by Allie**
 
+*Powered by mise, starship, and way too much coffee ☕*

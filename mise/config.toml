@@ -1,0 +1,19 @@
+[tools]
+# Development languages and runtimes
+node = "latest"
+python = "latest"
+rust = "latest"
+go = "latest"
+
+# CLI tools
+lazygit = "latest"
+
+# AI/LLM CLI tools
+"npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
+
+# Note: Claude Code is installed locally, not via mise
+# Use: /home/Allie/.claude/local/claude
+
+[settings]
+experimental = true

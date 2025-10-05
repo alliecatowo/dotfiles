@@ -1,0 +1,189 @@
+# Format - keep it clean and left-aligned
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$python\
+$rust\
+$golang\
+$nodejs\
+$docker_context\
+$package\
+$mise\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$status\
+$character"""
+
+# Speed optimizations
+command_timeout = 500
+scan_timeout = 10
+
+# Dracula color palette
+palette = "dracula"
+
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"
+
+# Character prompt icons - unicorn always!
+[character]
+success_symbol = "[🦄](bold green)"
+error_symbol = "[🦄](bold red)"
+
+# Directory with useful info
+[directory]
+style = "bold cyan"
+truncate_to_repo = false
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " 󰌾"
+read_only_style = "bold red"
+format = "[󰉋 $path]($style)[$read_only]($read_only_style) "
+
+# Git branch with icon
+[git_branch]
+symbol = "󰊢 "
+style = "bold pink"
+format = "[$symbol$branch]($style) "
+truncation_length = 20
+truncation_symbol = "…"
+
+# Git status - comprehensive with nerd fonts
+[git_status]
+style = "bold purple"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+disabled = false
+conflicted = "󰞇${count}"
+ahead = "󰜷${count}"
+behind = "󰜮${count}"
+diverged = "󰃻${ahead_count}󰜮${behind_count}"
+up_to_date = ""
+untracked = "󰋗${count}"
+stashed = "󰏗${count}"
+modified = "󰏫${count}"
+staged = "󰐗${count}"
+renamed = "󰑕${count}"
+deleted = "󰆴${count}"
+
+# Git state (merge, rebase, etc)
+[git_state]
+style = "bold yellow"
+format = '[󰜘 $state( $progress_current/$progress_total)]($style) '
+
+# Command execution time
+[cmd_duration]
+min_time = 2000
+format = "[󱎫 $duration]($style) "
+style = "bold yellow"
+show_milliseconds = false
+
+# Username (only shown when needed)
+[username]
+show_always = false
+style_user = "bold cyan"
+format = "[$user]($style) "
+
+# Hostname (SSH only)
+[hostname]
+ssh_only = true
+style = "bold purple"
+format = "[@$hostname]($style) "
+
+# Python with venv detection
+[python]
+symbol = "󰌠 "
+style = "bold yellow"
+format = 'via [$symbol$version( $virtualenv)]($style) '
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "requirements.txt", "pyproject.toml"]
+
+# Rust
+[rust]
+symbol = "󱘗 "
+style = "bold orange"
+format = "via [$symbol$version]($style) "
+
+# Go
+[golang]
+symbol = "󰟓 "
+style = "bold cyan"
+format = "via [$symbol$version]($style) "
+
+# Node.js
+[nodejs]
+symbol = "󰎙 "
+style = "bold green"
+format = "via [$symbol$version]($style) "
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+# Docker context
+[docker_context]
+symbol = "󰡨 "
+style = "bold blue"
+format = "via [$symbol$context]($style) "
+only_with_files = true
+
+# Package version
+[package]
+symbol = "󰏗 "
+style = "bold purple"
+format = "[$symbol$version]($style) "
+
+# Background jobs
+[jobs]
+symbol = "󰜎 "
+style = "bold blue"
+number_threshold = 1
+format = "[$symbol$number]($style) "
+
+# Battery indicator
+[battery]
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+format = "[$symbol$percentage]($style) "
+
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+[[battery.display]]
+threshold = 50
+style = "bold yellow"
+
+# Exit status (shown when non-zero)
+[status]
+disabled = false
+symbol = "󰅙 "
+format = '[$symbol$status]($style) '
+style = "bold red"
+recognize_signal_code = true
+pipestatus = true
+
+# Mise environment manager
+[mise]
+symbol = "󰏗 "
+style = "bold purple"
+format = "via [$symbol]($style) "
+
+# Disable cloud stuff
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true

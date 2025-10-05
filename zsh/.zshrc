@@ -1,90 +1,95 @@
-# ── ASDF Setup (must be early) ──────────────────────────────────
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# Reconstructed .zshrc - Mise-first approach
+# Updated: 2025-10-05
 
-# ── Antidote Setup ───────────────────────────────────────────────
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
-[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
+# ── History Configuration ─────────────────────────────────────
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=50000
 
-fpath=(/opt/homebrew/share/antidote/functions $fpath)
-autoload -Uz antidote
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  antidote bundle <${zsh_plugins}.txt >! ${zsh_plugins}.zsh
-fi
+# History options for better behavior
+setopt share_history           # Share history across all sessions
+setopt hist_ignore_all_dups    # Remove older duplicate entries from history
+setopt hist_find_no_dups       # Don't show duplicates when searching
+setopt hist_reduce_blanks      # Remove superfluous blanks from history
+setopt hist_verify             # Show command with history expansion before running
+setopt inc_append_history      # Add commands immediately, not at shell exit
+setopt extended_history        # Record timestamp of command
 
-# ── Completion Setup ─────────────────────────────────────────────
+# ── Mise Activation ───────────────────────────────────────────
+# Mise manages all development tools (node, python, rust, go, etc.)
+eval "$(~/.local/bin/mise activate zsh)"
+
+# ── Antidote Plugin Manager ────────────────────────────────────
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load ${ZDOTDIR:-~}/.zsh_plugins.txt
+
+# ── Completion Setup ──────────────────────────────────────────
 autoload -Uz compinit colors
 compinit -C
 colors
-source ~/.zsh_plugins.zsh
 
-export LS_COLORS="$(vivid generate dracula 2>/dev/null || gdircolors -b)"
-
-# fzf-tab-specific styles
-
+# Better completion matching
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# zstyle ':fzf-tab:*' fzf-command fzf
-zstyle ':fzf-tab:*' continuous-trigger '/'
-zstyle ':fzf-tab:*' prefix ''
-zstyle ':fzf-tab:*' switch-group ',' '.'
-
-# In .zshrc
-[[ -o interactive ]] || return
-
-# Then AFTER Antidote loads plugins and fzf-tab is sourced
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:*:*' fzf-preview '
-  mimetype=$(file --mime-type -b "$realpath")
-  printf "\\033_Ga=d,i=1337;\\033\\\\"
-  if [ -d "$realpath" ]; then
-    lsd --color=always --icon=always --long --date=relative --header \
-        --blocks name,size,date --group-dirs=first "$realpath"
-  elif [[ "$realpath" == *.json ]]; then
-    bat --language=json --style=numbers --color=always --line-range :500 "$realpath"
-  elif [[ "$realpath" == *.pdf ]]; then
-    pdftotext "$realpath" - | head -n 100
-  elif [[ "$mimetype" == image/* ]]; then
-    chafa --format=kitty --size=40x20 "$realpath" \
-      | sed "s/^/\\033_Gf=100,a=T,t=d,i=1337;/" \
-      | sed "s/\$/\\033\\\\/"
-  elif [[ "$mimetype" == video/* || "$mimetype" == audio/* ]]; then
-    echo "$realpath"
-    echo "---"
-    ffprobe -v error -show_entries format=duration:format_tags=title:format_tags=comment \
-      -of default=noprint_wrappers=1:nokey=0 "$realpath" 2>/dev/null | head -n 20
-  elif [ -f "$realpath" ] && bat --color=always --plain "$realpath" >/dev/null 2>&1; then
-    bat --style=numbers --color=always --line-range :500 "$realpath"
-  elif [[ "$LBUFFER" =~ "^([[:alnum:]_-]+)( +([[:alnum:]_-]+))?" ]]; then
-    cmd1=${match[1]}
-    cmd2=${match[3]}
-    if command -v "$cmd1" >/dev/null; then
-      "$cmd1" $cmd2 --help 2>&1 | head -n 50 || man "$cmd1-$cmd2" | col -bx | head -n 50
-    fi
-  elif command -v "$word" >/dev/null; then
-    "$word" --help 2>&1 | head -n 50 || man "$word" | col -bx | head -n 50
-  else
-    file "$realpath"
-  fi
-'
-
-# ── Bindings ───────────────────────────────────────────────────
+# ── Key Bindings ──────────────────────────────────────────────
+# Ctrl+Space to accept autosuggestion
 bindkey '^ ' autosuggest-accept
-bindkey '^R' fzf-history-widget
-# ── Tool Initialization ──────────────────────────────────────────
-eval "$(zoxide init zsh)"
+
+# Ctrl+arrow keys for word navigation
+bindkey '^[[1;5C' forward-word      # Ctrl+RightArrow
+bindkey '^[[1;5D' backward-word     # Ctrl+LeftArrow
+
+# Alt+arrow keys for word navigation (alternative)
+bindkey '^[[1;3C' forward-word      # Alt+RightArrow
+bindkey '^[[1;3D' backward-word     # Alt+LeftArrow
+
+# Better history search with up/down arrows
+bindkey '^[[A' history-search-backward  # Up arrow
+bindkey '^[[B' history-search-forward   # Down arrow
+
+# Home/End keys
+bindkey '^[[H' beginning-of-line    # Home
+bindkey '^[[F' end-of-line          # End
+
+# Delete key
+bindkey '^[[3~' delete-char         # Delete
+
+# ── Tool Initialization ───────────────────────────────────────
+# Starship prompt
 eval "$(starship init zsh)"
-# Use asdf-direnv instead of plain direnv for better asdf integration
-eval "$(asdf exec direnv hook zsh)"
 
-# Clean up PATH by removing old version managers and redundant entries
-export PATH=$(echo $PATH | tr ':' '\n' | grep -v '/opt/homebrew/opt/python' | grep -v 'fnm' | grep -v 'nvm' | sort -u | tr '\n' ':' | sed 's/:$//')
+# Zoxide (smart cd)
+eval "$(zoxide init zsh)"
 
-# ── Path Setup ────────────────────────────────────────────────────
-# Ensure asdf shims come first for tool version management, then Homebrew
-export PATH="$HOME/.asdf/shims:/opt/homebrew/bin:$PATH"
-export PATH="$PATH:/Users/allison/Library/Application\ Support/google-cloud-sdk/bin"
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+# ── Aliases ───────────────────────────────────────────────────
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias grep='grep --color=auto'
+
+# Modern replacements (if available)
+command -v eza &>/dev/null && alias ls='eza --icons'
+command -v bat &>/dev/null && alias cat='bat'
+
+# Claude Code
+alias claude="/home/Allie/.claude/local/claude"
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias gd='git diff'
+alias gco='git checkout'
+
+# Mise shortcuts
+alias mr='mise run'
+alias mi='mise install'
+alias mu='mise use'

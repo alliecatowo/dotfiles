@@ -1,23 +1,31 @@
 [user]
-	name = Allison
-	email = allison@parseceducation.com
-	signingkey = 702BFD9F7224C5B2
+	name = Allie
+	email = alliecatowo@users.noreply.github.com
+	signingkey = 0F21FC9B6B4E0320
 
-# Set GitHub identity for any repo under github.com
-[includeIf "hasconfig:remote.*.url:git@github.com"]
-    path = ~/.gitconfig-github
-
-# Set GitLab identity for any repo under gitlab.com
-[includeIf "hasconfig:remote.*.url:git@gitlab.com"]
-    path = ~/.gitconfig-gitlab
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [commit]
 	gpgsign = true
+
+[tag]
+	gpgsign = true
+
 [push]
 	autoSetupRemote = true
+
 [pull]
 	ff = false
 	rebase = true
+
 [init]
 	defaultBranch = main
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential

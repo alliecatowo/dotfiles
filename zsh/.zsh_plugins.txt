@@ -1,14 +1,8 @@
-# Core completion system
-zsh-users/zsh-completions kind:defer
-Aloxaf/fzf-tab kind:defer
+# Syntax highlighting
+zsh-users/zsh-syntax-highlighting
 
-# Autosuggestions
-zsh-users/zsh-autosuggestions kind:defer
-# Performance and QOL
-hlissner/zsh-autopair kind:defer
+# Autocomplete/suggestions
+zsh-users/zsh-autosuggestions
 
-# Git support
-romkatv/gitstatus kind:defer
-
-# Syntax Highlighting - must be last and static!
-zdharma-continuum/fast-syntax-highlighting kind:defer
+# Better completions
+zsh-users/zsh-completions
