@@ -24,19 +24,18 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# Mise activation - version manager
 eval "$(/home/Allie/.local/bin/mise activate bash)" # added by https://mise.run/bash
 
-# Starship prompt
-eval "$(starship init bash)"
 
-# Useful aliases
-alias ll='ls -lah'
-alias la='ls -A'
-alias l='ls -CF'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias grep='grep --color=auto'
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/Allie/.lmstudio/bin"
+# End of LM Studio CLI section
 
-# Claude Code alias
-alias claude="/home/Allie/.claude/local/claude"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Keep color enabled
+unset NO_COLOR
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/Allie/.local/bin:$PATH"

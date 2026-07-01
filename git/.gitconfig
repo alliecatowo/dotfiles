@@ -1,31 +1,19 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
 [user]
 	name = Allie
 	email = alliecatowo@users.noreply.github.com
-	signingkey = 0F21FC9B6B4E0320
-
+	signingkey = 4A5E74C4B2ED9DB2761102AE0F21FC9B6B4E0320
 [commit]
 	gpgsign = true
-
 [tag]
 	gpgsign = true
-
-[push]
-	autoSetupRemote = true
-
-[pull]
-	ff = false
-	rebase = true
-
 [init]
 	defaultBranch = main
-
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-
-[credential "https://github.com"]
-	helper =
-	helper = !/usr/bin/gh auth git-credential
-
-[credential "https://gist.github.com"]
-	helper =
-	helper = !/usr/bin/gh auth git-credential
+[gpg]
+	format = openpgp
+	program = /usr/bin/gpg

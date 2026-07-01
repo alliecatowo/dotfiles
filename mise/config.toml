@@ -1,19 +1,18 @@
 [tools]
-# Development languages and runtimes
 node = "latest"
+"npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
 python = "latest"
 rust = "latest"
 go = "latest"
-
-# CLI tools
 lazygit = "latest"
-
-# AI/LLM CLI tools
-"npm:@google/gemini-cli" = "latest"
-"npm:@openai/codex" = "latest"
-
-# Note: Claude Code is installed locally, not via mise
-# Use: /home/Allie/.claude/local/claude
+"npm:vercel" = "latest"
+"npm:opencode-ai" = "latest"
+"npm:vibe-kanban" = "latest"
+"npm:openai/codex" = "latest"
+bun = "latest"
+codex = "latest"
 
 [settings]
 experimental = true
+not_found_auto_install = false
