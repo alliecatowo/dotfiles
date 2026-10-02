@@ -60,9 +60,8 @@ dotfiles/
 ├── nvim/                    # Neovim configuration (LazyVim)
 ├── neofetch/
 │   └── config.conf          # System info display
-├── konsole/
-│   └── Dracula.colorscheme  # KDE Konsole Dracula theme
-└── .old/                    # Archived previous configs
+└── konsole/
+    └── Dracula.colorscheme  # KDE Konsole Dracula theme
 ```
 
 ## 🚀 Quick Start
