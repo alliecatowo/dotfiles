@@ -1,0 +1,84 @@
+# Global mise config. `mise bootstrap --config-dir config/mise` links ~/.config/mise to this
+# directory, so `mise use -g` and `mise dot add` write back into the repo.
+# Everything else lives in conf.d/ (loaded before this file, so this file wins on conflicts):
+#   10-packages  GUI apps and system packages     40-repos    repos to clone
+#   20-dotfiles  what gets linked or copied       50-secrets  private overlay env
+#   30-macos     macOS defaults and login items
+# tasks/ holds global tasks; `mise run bootstrap` is the glue for anything that can't be declared.
+
+min_version = "2026.10.25"
+
+[settings]
+lockfile = true
+not_found_auto_install = false
+dotfiles.root = "~/Develop/dotfiles/home"
+idiomatic_version_file_enable_tools = ["node", "python"]
+
+[env]
+# mise owns the claude binary, so stop it from updating itself out from under mise.
+DISABLE_AUTOUPDATER = "1"
+
+[tools]
+# ── Runtimes: global defaults so shims work outside projects. Projects pin their own. ──
+node = "24"
+python = "3.14"
+go = "latest"
+rust = { version = "stable", components = "rustfmt,clippy,rust-analyzer" }
+pnpm = "latest"
+uv = "latest"
+
+# ── Git, GitHub, repo hygiene ──
+gh = "latest"
+lazygit = "latest"
+delta = "latest"
+lefthook = "latest"
+jactionlint = "latest"   # maintained fork; actionlint is deprecated in the registry
+zizmor = "latest"
+shellcheck = "latest"
+gitleaks = "latest"
+"pypi:git-filter-repo" = "latest"
+
+# ── Shell ──
+starship = "latest"
+zoxide = "latest"
+fzf = "latest"
+ripgrep = "latest"
+fd = "latest"
+bat = "latest"
+"cargo:eza" = "latest"
+jq = "latest"
+yq = "latest"
+glow = "latest"
+hyperfine = "latest"
+neovim = "latest"
+
+# ── Rust extras ──
+cargo-binstall = "latest"
+"cargo:cargo-nextest" = "latest"
+sccache = "latest"
+
+# ── Deploy and release CLIs used across personal repos ──
+"npm:vercel" = "latest"
+"npm:wrangler" = "latest"
+"npm:firebase-tools" = "latest"
+flyctl = "latest"
+neonctl = "latest"
+goreleaser = "latest"
+git-cliff = "latest"
+cosign = "latest"
+
+# ── Secrets (sops/age edit + rekey; mise decrypts with its built-in rops) ──
+sops = "latest"
+age = "latest"
+
+# ── AI CLIs ──
+claude = "latest"
+codex = "latest"
+"npm:@google/gemini-cli" = "latest"
+"npm:typescript" = "latest"
+"npm:typescript-language-server" = "latest"
+"npm:@zvec/zvec-grep" = "latest"
+
+# ── macOS-only ──
+xcodes = { version = "latest", os = ["macos"] }
+"aqua:yonaskolb/XcodeGen" = { version = "latest", os = ["macos"] }

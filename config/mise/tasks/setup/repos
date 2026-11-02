@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Clone private repos (public ones come from [bootstrap.repos])"
+#MISE depends=["setup:github"]
+set -euo pipefail
+for repo in tessryl gemma-comp allisons-server; do
+  dest=~/Develop/$repo
+  [ -d "$dest/.git" ] || gh repo clone "alliecatowo/$repo" "$dest"
+done

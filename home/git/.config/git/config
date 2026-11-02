@@ -1,0 +1,67 @@
+# ~/.config/git/config: shared, tracked git config (symlinked).
+# ~/.gitconfig is a machine-local real file that `git config --global`, gh and git-lfs write to.
+# It loads after this file, so on a work machine its [user] wins. Append the includeIf blocks
+# from the README there to keep personal repos personal.
+
+[include]
+	path = ~/.config/git/personal
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+
+[init]
+	defaultBranch = main
+[core]
+	excludesFile = ~/.config/git/ignore
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+[merge]
+	conflictStyle = zdiff3
+[diff]
+	algorithm = histogram
+	colorMoved = default
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[rebase]
+	autoStash = true
+	updateRefs = true
+[rerere]
+	enabled = true
+
+# Clone over HTTPS (works before SSH keys exist), push over SSH.
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[alias]
+	co = checkout
+	cob = checkout -b
+	br = branch
+	ci = commit
+	st = status -sb
+	lg = log --graph --oneline --decorate
+	amend = commit --amend --no-edit

@@ -1,0 +1,83 @@
+# GUI apps and system packages. CLI tools belong in [tools] (config.toml), not here.
+# On macOS, real Homebrew is installed too (pre-packages hook below) so `brew` works for one-offs,
+# and homebrew_metadata hands mise-installed casks to Homebrew so `brew upgrade` sees everything.
+# This file stays the source of truth: add apps here, not with `brew install`.
+
+[bootstrap.brew]
+homebrew_metadata = true
+# Entries for a package manager this OS doesn't have are skipped.
+# Commented lines are suggestions found while surveying the old laptop; uncomment to adopt.
+
+[bootstrap.packages]
+# ── macOS: casks ──
+"brew-cask:ghostty" = { os = "macos", adopt = true }
+"brew-cask:raycast" = { os = "macos", adopt = true }
+"brew-cask:rectangle-pro" = { os = "macos", adopt = true }
+"brew-cask:orbstack" = { os = "macos", adopt = true }
+"brew-cask:tailscale-app" = { os = "macos", adopt = true }
+"brew-cask:claude" = { os = "macos", adopt = true }
+"brew-cask:google-chrome" = { os = "macos", adopt = true }
+"brew-cask:zen" = { os = "macos", adopt = true }
+"brew-cask:discord" = { os = "macos", adopt = true }
+"brew-cask:spotify" = { os = "macos", adopt = true }
+"brew-cask:visual-studio-code" = { os = "macos", adopt = true }
+"brew-cask:cmux" = { os = "macos", adopt = true }
+"brew-cask:tableplus" = { os = "macos", adopt = true }
+"brew-cask:bitwarden" = { os = "macos", adopt = true }
+"brew-cask:font-jetbrains-mono-nerd-font" = { os = "macos" }
+# "brew-cask:conductor" = { os = "macos" }
+# "brew-cask:zed" = { os = "macos" }
+# "brew-cask:vial" = { os = "macos" }              # keyboard configurator for the QMK/Vial boards
+# "brew-cask:qmk-toolbox" = { os = "macos" }
+# "brew-cask:keycastr" = { os = "macos" }
+# "brew-cask:jordanbaird-ice" = { os = "macos" }   # menu bar manager
+# "brew-cask:alt-tab" = { os = "macos" }
+# "brew-cask:stats" = { os = "macos" }
+# "brew-cask:betterdisplay" = { os = "macos" }
+# "brew-cask:shottr" = { os = "macos" }
+# "brew-cask:the-unarchiver" = { os = "macos" }
+# "brew-cask:appcleaner" = { os = "macos" }
+# "brew-cask:iina" = { os = "macos" }
+# "brew-cask:utm" = { os = "macos" }
+# "brew-cask:balenaetcher" = { os = "macos" }
+# "brew-cask:obsidian" = { os = "macos" }
+# "brew-cask:signal" = { os = "macos" }
+
+# ── macOS: formulae that mise [tools] can't provide ──
+"brew:mas" = { os = "macos" }
+"brew:git" = { os = "macos" }
+"brew:task" = { os = "macos" }   # taskwarrior; mise's `task` is go-task, a different tool
+
+# ── macOS: App Store (sign in to the App Store app first) ──
+"mas:937984704" = { os = "macos" }   # Amphetamine
+"mas:497799835" = { os = "macos" }   # Xcode
+
+# ── Fedora (GNOME) ──
+"dnf:zsh" = { os = "linux" }
+"dnf:git" = { os = "linux" }
+"dnf:gcc" = { os = "linux" }
+"dnf:make" = { os = "linux" }
+"dnf:task" = { os = "linux" }
+"flatpak:com.discordapp.Discord" = { os = "linux" }
+"flatpak:com.spotify.Client" = { os = "linux" }
+"flatpak:com.bitwarden.desktop" = { os = "linux" }
+"flatpak:com.google.Chrome" = { os = "linux" }
+"flatpak:app.zen_browser.zen" = { os = "linux" }
+
+# Glassy: a third-party cask needs Ruby 3 for mise to evaluate it, and a fresh Mac has only 2.6,
+# so install it from the release directly. Bump version and sha256 with each release.
+[bootstrap.packages."macos-app:glassy"]
+version = "0.6.2"
+url = "https://github.com/alliecatowo/glassy/releases/download/v{{version}}/glassy-{{version}}-macos-aarch64.dmg"
+sha256 = "9c69bb527fa041be934b56829a5dbd7f8d5f0dbaaf161324846cd4f5453accdb"
+artifact = "Glassy.app"
+os = "macos/arm64"
+
+[bootstrap.hooks]
+pre-packages = """
+if [ "$(uname -s)" = Darwin ] && [ ! -x /opt/homebrew/bin/brew ]; then
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+"""
+# Glassy is unsigned. The tap's cask clears quarantine for Glassy.app only; do the same here.
+post-packages = "[ -d /Applications/Glassy.app ] && xattr -dr com.apple.quarantine /Applications/Glassy.app || true"

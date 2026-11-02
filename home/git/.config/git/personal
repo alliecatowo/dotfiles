@@ -1,0 +1,6 @@
+# Personal identity. Included by ~/.config/git/config, and on a work machine by includeIf
+# blocks at the end of ~/.gitconfig (see README). Email and signing key travel together.
+[user]
+	name = Allison Coleman
+	email = 98134425+alliecatowo@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519_signing.pub

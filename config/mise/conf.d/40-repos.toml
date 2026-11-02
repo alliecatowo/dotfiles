@@ -1,0 +1,28 @@
+# Repos cloned by `mise bootstrap` (they run before dotfiles and tools).
+# Public repos clone over HTTPS so no SSH key or gh login is needed yet; git's pushInsteadOf
+# sends pushes over SSH. Private repos need gh auth, so `mise run setup:repos` clones them later.
+# Ranked by commit activity over the last 60 days. Anything else: `gh repo clone alliecatowo/<name>`.
+
+[vars.repos_dir]
+default = "~/Develop"
+prompt = "Where should personal repos be cloned?"
+
+[bootstrap.repos]
+"~/.antidote" = { url = "https://github.com/mattmc3/antidote.git" }
+
+"{{ vars.repos_dir }}/jupyterlite-web-mcp" = { url = "https://github.com/alliecatowo/jupyterlite-web-mcp.git" }
+"{{ vars.repos_dir }}/pgarbor" = { url = "https://github.com/alliecatowo/pgarbor.git", filter = "blob:none" }   # 12.7k files
+"{{ vars.repos_dir }}/portfolio" = { url = "https://github.com/alliecatowo/portfolio.git" }
+"{{ vars.repos_dir }}/lumen" = { url = "https://github.com/alliecatowo/lumen.git" }
+"{{ vars.repos_dir }}/patches" = { url = "https://github.com/alliecatowo/patches.git" }
+"{{ vars.repos_dir }}/gh-stories" = { url = "https://github.com/alliecatowo/gh-stories.git" }
+"{{ vars.repos_dir }}/openapi-web-mcp" = { url = "https://github.com/alliecatowo/openapi-web-mcp.git" }
+"{{ vars.repos_dir }}/ticket-master" = { url = "https://github.com/alliecatowo/ticket-master.git" }
+"{{ vars.repos_dir }}/shoal" = { url = "https://github.com/alliecatowo/shoal.git" }
+"{{ vars.repos_dir }}/glassy" = { url = "https://github.com/alliecatowo/glassy.git" }
+"{{ vars.repos_dir }}/puml" = { url = "https://github.com/alliecatowo/puml.git" }
+"{{ vars.repos_dir }}/assistarr" = { url = "https://github.com/alliecatowo/assistarr.git" }
+"{{ vars.repos_dir }}/daggler" = { url = "https://github.com/alliecatowo/daggler.git" }
+"{{ vars.repos_dir }}/homebrew-tap" = { url = "https://github.com/alliecatowo/homebrew-tap.git" }
+"{{ vars.repos_dir }}/allie-cat-corne" = { url = "https://github.com/alliecatowo/allie-cat-corne.git", submodules = true }
+"{{ vars.repos_dir }}/raycast-keyboard-layout" = { url = "https://github.com/alliecatowo/raycast-keyboard-layout.git" }

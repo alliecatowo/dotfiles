@@ -1,0 +1,9 @@
+# Public repo: block secrets before they're committed. Install with `lefthook install`
+# (the repo's mise.toml does it on `mise install`).
+pre-commit:
+  commands:
+    gitleaks:
+      run: gitleaks git --pre-commit --staged --redact --no-banner
+    shellcheck:
+      glob: "{install.sh,config/mise/tasks/**/*}"
+      run: shellcheck {staged_files}

@@ -1,0 +1,22 @@
+# Ghostty: https://ghostty.org/docs/config
+# No `command`: Ghostty starts the login shell, which is right on both macOS and Linux.
+
+theme = Dracula
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+
+# Shift+Enter sends a newline without submitting (Claude Code, other TUIs)
+keybind = shift+enter=text:\x1b\r
+
+# Word navigation
+keybind = ctrl+left=esc:b
+keybind = ctrl+right=esc:f
+keybind = alt+left=esc:b
+keybind = alt+right=esc:f
+
+# Programs may write the clipboard (image paste into TUIs); reading it asks first.
+clipboard-write = allow
+clipboard-read = ask
+
+macos-option-as-alt = true
+shell-integration-features = cursor,sudo,title

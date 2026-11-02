@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Log in to GitHub as alliecatowo with the scopes needed to register SSH keys"
+set -euo pipefail
+scopes="admin:public_key,admin:ssh_signing_key"
+if gh auth status --hostname github.com >/dev/null 2>&1; then
+  gh auth status --hostname github.com 2>&1 | grep -q admin:ssh_signing_key \
+    || gh auth refresh --hostname github.com --scopes "$scopes"
+else
+  gh auth login --hostname github.com --git-protocol https --web --scopes "$scopes"
+fi

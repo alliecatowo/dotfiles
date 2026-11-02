@@ -1,0 +1,23 @@
+# Global gitignore: only machine/editor junk. Project build output belongs in each repo's .gitignore,
+# otherwise a global rule silently hides files that a repo means to commit.
+
+# OS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+
+# Local-only tool config
+**/.claude/settings.local.json
+**/.mise.local.toml
+**/mise.local.toml
+.env.local
+.env.*.local

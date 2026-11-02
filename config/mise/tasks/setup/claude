@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Install the personal Claude Code plugin set"
+set -euo pipefail
+market=claude-plugins-official
+claude plugin marketplace list 2>/dev/null | grep -q "$market" \
+  || claude plugin marketplace add anthropics/claude-plugins-official
+installed=$(claude plugin list 2>/dev/null || true)
+for p in context7 typescript-lsp rust-analyzer-lsp swift-lsp code-simplifier skill-creator; do
+  grep -q "$p@$market" <<<"$installed" || claude plugin install "$p@$market"
+done

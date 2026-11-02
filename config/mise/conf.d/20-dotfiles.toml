@@ -1,0 +1,51 @@
+# Dotfiles live under home/<group>/ as paths relative to ~ (Stow layout, so `stow -d home -t ~ <group>`
+# still works as an escape hatch). Each group is deployed file by file.
+#
+# Two modes:
+#   symlink-each  edits land in the repo immediately. For files nothing else rewrites.
+#   copy          a real file. For files tools or you edit in place. Run `mise dot status` to see
+#                 drift and `mise dot add --changed` to pull edits back into the repo.
+
+[dotfile_groups.zsh]
+root = "zsh"
+[dotfile_groups.zsh.entries]
+"~/.zshrc" = { mode = "copy" }
+
+[dotfile_groups.bash]
+root = "bash"
+
+[dotfile_groups.git]
+root = "git"
+
+[dotfile_groups.ssh]
+root = "ssh"
+[dotfile_groups.ssh.entries]
+"~/.ssh/config" = { mode = "copy", permissions = "0600" }
+
+[dotfile_groups.starship]
+root = "starship"
+
+[dotfile_groups.ghostty]
+root = "ghostty"
+
+[dotfile_groups.nvim]
+root = "nvim"
+
+[dotfile_groups.vim]
+root = "vim"
+
+[dotfiles]
+# A real, untracked ~/.gitconfig so `git config --global`, gh and git-lfs write there
+# instead of through the symlinked ~/.config/git/config into the repo.
+"~/.gitconfig" = { content = "# Machine-local git config. Shared config: ~/.config/git/config\n", create_if_missing = true }
+
+# ~/.zshenv is read before ~/.zprofile, whose mise shims block calls `mise` by name. mise.run
+# installs to ~/.local/bin, so that has to be on PATH first. This edits one line and leaves the rest
+# of the file alone.
+"~/.zshenv/local-bin" = { line = 'export PATH="$HOME/.local/bin:$PATH"' }
+
+[bootstrap.user]
+login_shell = "zsh"   # /bin/zsh on macOS, /usr/bin/zsh on Fedora
+
+[bootstrap.mise_shell_activate]
+zprofile = "shims"   # .zshrc activates mise itself; GUI apps and login shells get shims

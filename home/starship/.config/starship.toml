@@ -1,0 +1,176 @@
+# Starship — Dracula + 🦄 (fresh take, same vibe)
+
+palette = "dracula"
+command_timeout = 1500
+scan_timeout = 10
+
+# Prompt: minimal until needed — directory, git, env, tools, then unicorn
+format = """
+$directory\
+$container\
+$git_branch\
+$git_commit\
+$git_status\
+$git_state\
+$python\
+$nodejs\
+$rust\
+$golang\
+$docker_context\
+$mise\
+$package\
+$cmd_duration\
+$line_break\
+$time\
+$jobs\
+$battery\
+$status\
+$character"""
+
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"
+
+# 🦄 Unicorn prompt — green when happy, red when something broke
+[character]
+success_symbol = "[🦄](bold green)"
+error_symbol = "[🦄](bold red)"
+
+[directory]
+style = "bold cyan"
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[$path]($style) "
+
+[git_branch]
+style = "bold pink"
+format = "on [$symbol$branch]($style) "
+truncation_length = 24
+truncation_symbol = "…"
+
+[git_status]
+style = "bold purple"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "≠ "
+ahead = "↑${count} "
+behind = "↓${count} "
+diverged = "↑${ahead_count}↓${behind_count} "
+up_to_date = ""
+untracked = "?${count} "
+stashed = "₴${count} "
+modified = "~${count} "
+staged = "+${count} "
+renamed = "→${count} "
+deleted = "✘${count} "
+
+[git_commit]
+commit_hash_length = 7
+style = "bold green"
+format = "[($hash $tag )]($style) "
+only_detached = true
+
+[git_state]
+style = "bold yellow"
+format = "[ $state( $progress_current/$progress_total)]($style) "
+
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "bold yellow"
+show_milliseconds = false
+
+[username]
+show_always = false
+style_user = "bold cyan"
+format = "[$user]($style) "
+
+[hostname]
+ssh_only = true
+style = "bold purple"
+format = "[@$hostname]($style) "
+
+# Only when inside a container (e.g. dev container)
+[container]
+format = "[$symbol [$name]]($style) "
+style = "bold cyan dimmed"
+
+# Clock on second line — minimal, out of the way
+[time]
+format = "[$time]($style) "
+style = "dimmed"
+time_format = "%H:%M"
+
+[python]
+style = "bold yellow"
+format = "via [$symbol$version( $virtualenv)]($style) "
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "requirements.txt", "pyproject.toml"]
+
+[nodejs]
+style = "bold green"
+format = "via [$symbol$version]($style) "
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[rust]
+style = "bold orange"
+format = "via [$symbol$version]($style) "
+
+[golang]
+style = "bold cyan"
+format = "via [$symbol$version]($style) "
+
+[docker_context]
+style = "bold blue"
+format = "via [$symbol$context]($style) "
+only_with_files = true
+
+[package]
+style = "bold purple"
+format = "[$symbol$version]($style) "
+
+[jobs]
+style = "bold blue"
+number_threshold = 1
+format = "[$symbol$number]($style) "
+
+[battery]
+format = "[$symbol$percentage]($style) "
+
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+[[battery.display]]
+threshold = 50
+style = "bold yellow"
+
+[status]
+disabled = false
+symbol = "✘ "
+format = "[$symbol$status]($style) "
+style = "bold red"
+recognize_signal_code = true
+pipestatus = true
+
+[mise]
+style = "bold purple"
+format = "via [$symbol]($style) "
+
+# Less noise
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[kubernetes]
+disabled = true

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#MISE description="Post-bootstrap glue: GitHub login, SSH keys, private repos, Claude plugins, Tailscale"
+#MISE depends=["setup:github", "setup:ssh", "setup:repos", "setup:claude", "setup:tailscale"]
+#MISE depends_post=["doctor"]
+# `mise bootstrap` runs this last, every time, so every dependency must be safe to repeat.
+set -euo pipefail
+# The repo's gitleaks pre-commit hook: it's public, so install the guard on every machine.
+(cd ~/Develop/dotfiles && lefthook install >/dev/null)
+# Secrets are opt-in and interactive (paste the age key): run `mise run setup:secrets` yourself.

@@ -1,0 +1,44 @@
+# This repo is public. Secrets live in alliecatowo/dotfiles-private, and gitleaks runs on every commit.
+
+# Keys, identities, decrypted material
+*.key
+*.pem
+*.pub
+*.gpg
+*.agekey
+id_rsa*
+id_ed25519*
+id_ecdsa*
+age.txt
+keys.txt
+*.dec.*
+*.plain.*
+*.decrypted.*
+.env
+.env.*
+secrets.*
+*_credentials
+*_token
+*_secret
+.gnupg/
+
+# SSH: only the shared config is tracked
+home/ssh/.ssh/*
+!home/ssh/.ssh/config
+
+# Machine-local files that land in ~/.config/mise and ~/.config/git through the links
+config/mise/config.local.toml
+config/mise/miserc.local.toml
+config/mise/*.local.toml
+home/git/.config/git/allowed_signers
+
+# Neovim state
+home/nvim/.config/nvim/lazy-lock.json
+home/nvim/.config/nvim/.lazy/
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+*~
+.cache/

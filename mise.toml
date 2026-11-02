@@ -1,0 +1,20 @@
+# Project config for working ON this repo (not the global config: that's config/mise/).
+
+[tools]
+gitleaks = "latest"
+lefthook = "latest"
+shellcheck = "latest"
+
+[hooks]
+postinstall = "lefthook install"
+
+[tasks.check]
+description = "Scan for secrets and lint the shell scripts"
+run = [
+  "gitleaks dir --redact --no-banner .",
+  "shellcheck install.sh config/mise/tasks/bootstrap config/mise/tasks/doctor config/mise/tasks/setup/*",
+]
+
+[tasks.plan]
+description = "Show what `mise bootstrap` would change on this machine"
+run = "mise bootstrap plan"

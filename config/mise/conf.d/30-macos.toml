@@ -1,0 +1,45 @@
+# macOS settings captured from the old laptop (macOS 27): only values that differ from stock.
+# Preview with `mise bootstrap macos defaults apply --dry-run`.
+
+[bootstrap.macos.dock]
+autohide = true
+tilesize = 53
+magnification = true
+largesize = 70
+apps = [
+  "/Applications/Google Chrome.app",
+  "/Applications/Ghostty.app",
+  "/Applications/Visual Studio Code.app",
+  "/Applications/Claude.app",
+  "/Applications/Discord.app",
+  "/Applications/Spotify.app",
+]
+
+[bootstrap.macos.keyboard]
+automatic_capitalization = false
+automatic_spelling_correction = false
+
+[bootstrap.macos.trackpad]
+tap_to_click = true
+
+[bootstrap.macos.defaults."NSGlobalDomain"]
+AppleInterfaceStyle = "Dark"
+AppleAccentColor = 6   # pink
+NSAutomaticPeriodSubstitutionEnabled = false
+NSAutomaticInlinePredictionEnabled = false
+
+# Rectangle Pro does the tiling, so turn off macOS's own edge-drag tiling.
+[bootstrap.macos.defaults."com.apple.WindowManager"]
+EnableTilingByEdgeDrag = false
+EnableTiledWindowMargins = false
+
+# Additive: apps that register themselves (Rectangle Pro does) are left alone.
+[bootstrap.macos.login_items]
+apps = [
+  "/Applications/Raycast.app",
+  "/Applications/Rectangle Pro.app",
+  "/Applications/Tailscale.app",
+]
+
+[bootstrap.hooks]
+post-defaults = "killall Dock Finder SystemUIServer 2>/dev/null || true"

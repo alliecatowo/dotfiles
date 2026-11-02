@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#MISE description="Join the tailnet (needed before anything on the home server is reachable)"
+set -euo pipefail
+case "$(uname -s)" in
+  Darwin)
+    # The cask's GUI app owns login; the CLI ships inside it.
+    ts=/Applications/Tailscale.app/Contents/MacOS/Tailscale
+    [ -x "$ts" ] || { echo "Tailscale.app missing: run 'mise bootstrap --only packages'"; exit 1; }
+    "$ts" status >/dev/null 2>&1 || { open -a Tailscale; echo "Log in from the Tailscale menu bar icon."; }
+    ;;
+  Linux)
+    if ! command -v tailscale >/dev/null; then
+      sudo dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+      sudo dnf install -y tailscale
+    fi
+    systemctl is-active --quiet tailscaled || sudo systemctl enable --now tailscaled
+    tailscale status >/dev/null 2>&1 || sudo tailscale up --operator="$USER"
+    ;;
+esac

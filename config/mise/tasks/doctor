@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#MISE description="Check that this machine matches the repo: dotfiles, tools, identity, secrets"
+set -uo pipefail
+fail=0
+ok()   { printf '  ok    %s\n' "$1"; }
+bad()  { printf '  FAIL  %s\n' "$1"; fail=1; }
+warn() { printf '  warn  %s\n' "$1"; }
+
+echo "dotfiles"
+if mise dot status --quiet >/dev/null 2>&1; then ok "all entries applied"; else warn "drift: run 'mise dot status'"; fi
+repo=~/Develop/dotfiles
+if [ -z "$(git -C "$repo" status --porcelain 2>/dev/null)" ]; then ok "repo clean"
+else warn "repo has uncommitted changes (a tool may have written through a symlink)"; fi
+
+echo "tools"
+if mise ls --missing --global 2>/dev/null | grep -q .; then bad "missing tools: run 'mise install'"; else ok "global tools installed"; fi
+
+echo "git identity"
+email=$(git config user.email)
+case "$email" in *@users.noreply.github.com) ok "email $email" ;; *) bad "unexpected email $email" ;; esac
+if [ -f ~/.ssh/id_ed25519_signing.pub ]; then ok "signing key present"; else bad "no signing key: run 'mise run setup:ssh'"; fi
+if grep -q . ~/.config/git/allowed_signers 2>/dev/null; then ok "allowed_signers"; else warn "allowed_signers empty"; fi
+
+echo "secrets"
+priv=~/.local/share/dotfiles-private
+if [ ! -d "$priv/.git" ]; then
+  warn "private overlay not cloned (opt-in: 'mise run setup:secrets')"
+else
+  [ -s ~/.config/mise/age.txt ] || bad "overlay present but ~/.config/mise/age.txt missing"
+  # sops keeps key names in plaintext, so compare names with what mise actually exports.
+  want=$(jq -r 'keys[] | select(. != "sops")' "$priv/shell.enc.json" | sort)
+  have=$(mise env --json 2>/dev/null | jq -r 'keys[]' | sort)
+  missing=$(comm -23 <(echo "$want") <(echo "$have"))
+  if [ -z "$missing" ]; then ok "$(echo "$want" | grep -c .) secrets load"; else bad "not loaded: $missing"; fi
+fi
+exit $fail

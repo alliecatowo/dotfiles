@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#MISE description="Create this machine's SSH auth and signing keys and register both on GitHub"
+#MISE depends=["setup:github"]
+set -euo pipefail
+host=$(hostname -s)
+email=$(git config user.email)
+auth=~/.ssh/id_ed25519
+sign=~/.ssh/id_ed25519_signing
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+
+# One key per device and per purpose: lose a machine, revoke two keys, nothing else changes.
+# ssh-keygen prompts for a passphrase; the macOS keychain (UseKeychain) remembers it.
+[ -f "$auth" ] || ssh-keygen -t ed25519 -a 64 -C "alliecatowo auth $host" -f "$auth"
+[ -f "$sign" ] || ssh-keygen -t ed25519 -a 64 -C "alliecatowo signing $host" -f "$sign"
+
+registered() { gh api "$1" --jq '.[].key' | grep -qF "$(cut -d' ' -f1-2 "$2")"; }
+registered user/keys "$auth.pub" \
+  || gh ssh-key add "$auth.pub" --type authentication --title "$host auth"
+registered user/ssh_signing_keys "$sign.pub" \
+  || gh ssh-key add "$sign.pub" --type signing --title "$host signing"
+
+# allowed_signers is per machine: it lets `git log --show-signature` verify this machine's commits.
+signers=~/.config/git/allowed_signers
+line="$email $(cut -d' ' -f1-2 "$sign.pub")"
+grep -qxF "$line" "$signers" 2>/dev/null || echo "$line" >> "$signers"
