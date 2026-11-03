@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Create this machine's SSH auth and signing keys and register both on GitHub"
+#MISE interactive=true
 #MISE depends=["setup:github"]
 set -euo pipefail
 host=$(hostname -s)

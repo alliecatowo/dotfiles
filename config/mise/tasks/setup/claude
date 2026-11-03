@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 #MISE description="Install the personal Claude Code plugin set"
-set -euo pipefail
+#MISE interactive=true
+set -uo pipefail
+# Warn instead of failing: a plugin hiccup (e.g. Claude not logged in yet) shouldn't stop bootstrap.
 market=claude-plugins-official
 claude plugin marketplace list 2>/dev/null | grep -q "$market" \
-  || claude plugin marketplace add anthropics/claude-plugins-official
+  || claude plugin marketplace add anthropics/claude-plugins-official \
+  || { echo "warn: couldn't add $market; re-run 'mise run setup:claude' after logging in to Claude"; exit 0; }
 installed=$(claude plugin list 2>/dev/null || true)
 for p in context7 typescript-lsp rust-analyzer-lsp swift-lsp code-simplifier skill-creator; do
-  grep -q "$p@$market" <<<"$installed" || claude plugin install "$p@$market"
+  grep -q "$p@$market" <<<"$installed" || claude plugin install "$p@$market" || echo "warn: $p failed to install"
 done

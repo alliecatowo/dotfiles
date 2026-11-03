@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Log in to GitHub as alliecatowo with the scopes needed to register SSH keys"
+#MISE interactive=true
 set -euo pipefail
 scopes="admin:public_key,admin:ssh_signing_key"
 if gh auth status --hostname github.com >/dev/null 2>&1; then

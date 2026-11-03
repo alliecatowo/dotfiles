@@ -10,9 +10,12 @@ Secrets live in a private overlay (see [Secrets](#secrets)).
 ## New machine
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/alliecatowo/dotfiles/main/install.sh | sh -s -- --dry-run   # preview
-curl -fsSL https://raw.githubusercontent.com/alliecatowo/dotfiles/main/install.sh | sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/alliecatowo/dotfiles/main/install.sh)"
 ```
+
+To preview first, run `mise bootstrap plan` (or `mise bootstrap --dry-run`) once the repo is cloned.
+A `--dry-run` passed to `install.sh` can only show the clone step, because nothing is checked out yet.
+Never run this for real on a work laptop: macOS defaults, login items and casks apply system-wide.
 
 `install.sh` installs Xcode Command Line Tools if needed (re-run once it finishes) and mise from mise.run.
 It clones this repo to `~/Develop/dotfiles` and links `~/.config/mise` to `config/mise/`.
